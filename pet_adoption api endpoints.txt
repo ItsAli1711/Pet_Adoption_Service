@@ -1,0 +1,50 @@
+/api/home for homepage
+/api/reg_user:
+/api/reg_shelter
+/api/reg_admin   
+/api/add_pet: add new pet   (users,shelter)
+/api/add_shelter: add a shelter (shelter)
+/api/shelters for fetching list of shelters (role: user,Admin)
+/api/pets for fetching the list of pets (role: User,Admin)
+/api/pets/{id}: for fetching pet details	(role: User)
+/api/adoption_request: for submitting adoption requests (role: user)
+/api/admin/adoption_requests:  for admin to view adoption requests (admin)
+/api/shelter/{id} for fetching shelter details (user,admin)
+/api/admin/pets/{id}: modify or delete pets   (admin)
+/api/admin/shelter/{id} :modify or delete shelter(admin)
+/api/admin/adoption_requests/{id}    modify/update requests (admin)
+
+
+
+
+
+
+
+
+
+
+
+{
+        "firstname": "Sample",
+        "lastname": "User1",
+        "username": "user1",
+        "email":"abc@xyz",
+        "password":"userpass",
+        "roles":"USER"
+    }
+      {
+        "firstname": "Sample",
+        "lastname": "Shelter1",
+        "username": "Shelter1",
+        "email":"avsbc@xyz",
+        "password":"shelterpass",
+        "roles":"SHELTER"
+    }
+{
+    "firstname": "Sample",
+    "lastname": "Admin",
+    "username": "Admin",
+    "email": "mnop@xyz",
+    "password": "adminpass",
+    "roles": "ADMIN"
+}
