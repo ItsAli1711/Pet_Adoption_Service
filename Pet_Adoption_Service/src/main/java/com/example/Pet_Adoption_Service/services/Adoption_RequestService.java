@@ -20,6 +20,7 @@ public class Adoption_RequestService {
     private final adoption_requestRepo repo;
     private final PetRepo petRepo;
     private final UsersRepo usersRepo;
+    private final EmailService emailService;
 
     public adoption_request submitRequest(adoption_requestDTO adoptionRequestDTO) {
         Pet pet = petRepo.findById(adoptionRequestDTO.getPetId()).orElseThrow(() -> new RuntimeException("Pet not found with ID: "
@@ -37,5 +38,28 @@ public class Adoption_RequestService {
 
     public List<adoption_request> getAllRequests() {
         return repo.findAll();
+    }
+
+    public adoption_request updateRequestStatus(Integer requestId,String newStatus)
+    {
+        adoption_request request = repo.findById(requestId)
+                .orElseThrow(()->new RuntimeException("Request not found"));
+
+        request.setStatus(newStatus);
+
+        if("approved".equalsIgnoreCase(newStatus))
+        {
+            System.out.println("mail sent");
+            sendNotification(request);
+        }
+        return repo.save(request);
+    }
+
+    private void sendNotification(adoption_request request) {
+        String userEmail = request.getUsers().getEmail();
+        String sub = "Request Approval for Pet Adoption";
+        String msg = "yayyy!! The Wait is over, your adoption request for "+request.getPet().getName()
+                +" is finally approved";
+        emailService.sendMail(userEmail,sub,msg);
     }
 }

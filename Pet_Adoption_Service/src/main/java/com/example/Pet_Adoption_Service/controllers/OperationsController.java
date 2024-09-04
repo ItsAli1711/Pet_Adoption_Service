@@ -36,4 +36,31 @@ private final Adoption_RequestService adoptionRequestService;
         return adoptionRequestService.submitRequest(adoptionRequestDTO);
     }
 
+    @PutMapping("/admin/pets/{id}")
+    public Pet modify_pet(@PathVariable int id,@RequestBody Pet pet)
+    {
+        return petService.modifyById(id,pet);
+    }
+    @DeleteMapping("/admin/pets/{id}")
+    public void deleteById(@PathVariable int id)
+    {
+        petService.deleteById(id);
+    }
+
+    @PutMapping("/admin/shelter/{id}")
+    public Shelter modify_shelter(@PathVariable int id,@RequestBody Shelter shelter)
+    {
+        return shelterService.modifyById(id,shelter);
+    }
+    @DeleteMapping("/admin/shelter/{id}")
+    public void deleteShelterById(@PathVariable int id)
+    {
+        shelterService.deleteById(id);
+    }
+
+    @PutMapping("/admin/adoption_requests/{id}")
+    public adoption_request updateRequestStatus(@PathVariable Integer id,@RequestBody String newStatus)
+    {
+        return adoptionRequestService.updateRequestStatus(id,newStatus);
+    }
 }

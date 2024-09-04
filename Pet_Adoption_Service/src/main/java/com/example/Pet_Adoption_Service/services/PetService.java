@@ -19,9 +19,16 @@ public class PetService {
 
     public Pet add_pet(PetDTO petDTO)
     {
-        Shelter shelter = shelterRepository.findById(petDTO.getShelterId())
-                .orElseThrow(() -> new RuntimeException("Shelter not found with ID: " + petDTO.getShelterId()));
-
+        Shelter shelter = new Shelter();
+        if(petDTO.getShelterId() == 0)          // if pet is not from a shelter, users can assign 0 to ShelterId
+        {
+            shelter = null;
+        }
+        else
+        {
+            shelter = shelterRepository.findById(petDTO.getShelterId())
+                    .orElseThrow(() -> new RuntimeException("Shelter not found with ID: " + petDTO.getShelterId()));
+        }
 
         Pet pet = new Pet();
         pet.setName(petDTO.getName());
@@ -39,5 +46,14 @@ public class PetService {
     public Pet getPetById(int id)
     {
         return repo.findById(id).orElse(null);
+    }
+
+    public Pet modifyById(int id, Pet pet) {
+        pet.setId(id);
+        return repo.save(pet);
+    }
+    public void deleteById(int id)
+    {
+        repo.deleteById(id);
     }
 }

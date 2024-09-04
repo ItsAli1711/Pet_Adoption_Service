@@ -1,5 +1,6 @@
 package com.example.Pet_Adoption_Service.services;
 
+import com.example.Pet_Adoption_Service.models.Pet;
 import com.example.Pet_Adoption_Service.models.Shelter;
 import com.example.Pet_Adoption_Service.repositories.ShelterRepo;
 import lombok.RequiredArgsConstructor;
@@ -24,5 +25,14 @@ public class ShelterService {
 
     public List<Shelter> getshelters() {
         return repo.findAll();
+    }
+
+    public Shelter modifyById(int id, Shelter shelter) {
+        shelter.setId(id);
+        return repo.save(shelter);
+    }
+    public void deleteById(int id)
+    {
+        repo.deleteById(id);
     }
 }

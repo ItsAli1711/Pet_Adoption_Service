@@ -41,7 +41,7 @@ public class view {
     {
         return adoptionRequestService.getAllRequests();
     }
-    @GetMapping("/shelters")
+    @GetMapping("/shelters/{id}")
     public Shelter getShelterById(@PathVariable int id)
     {
         return shelterService.getShelterById(id);
